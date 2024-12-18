@@ -8,19 +8,19 @@
 #include <functional>
 
 struct ThreadData {
-    int start;
-    int end;
+    long long start; // Zmiana na long long
+    long long end;   // Zmiana na long long
     double step;
     double result = 0.0; // Inicjalizacja wyniku
 };
 
 class Integration {
 public:
-    Integration(int num_intervals, int num_threads);
+    Integration(long long num_intervals, int num_threads);
     double calculatePi();
     static double function(double x); // Funkcja do ca³kowania
 private:
-    int num_intervals;
+    long long num_intervals; // Zmiana na long long
     int num_threads;
     double step;
     std::vector<std::thread> threads; // Poprawiona deklaracja
