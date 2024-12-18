@@ -8,25 +8,25 @@
 #include <functional>
 
 struct ThreadData {
-    long long start; // Zmiana na long long
-    long long end;   // Zmiana na long long
+    long long start; 
+    long long end;   
     double step;
-    double result = 0.0; // Inicjalizacja wyniku
+    double result = 0.0; 
 };
 
 class Integration {
 public:
     Integration(long long num_intervals, int num_threads);
     double calculatePi();
-    static double function(double x); // Funkcja do ca³kowania
+    static double function(double x); 
 private:
-    long long num_intervals; // Zmiana na long long
+    long long num_intervals; 
     int num_threads;
     double step;
-    std::vector<std::thread> threads; // Poprawiona deklaracja
+    std::vector<std::thread> threads; 
     std::vector<ThreadData> thread_data;
 
-    static void threadTask(ThreadData& data); // Funkcja dla w¹tku
+    static void threadTask(ThreadData& data); 
 };
 
 #endif // INTEGRATION_H
