@@ -1,20 +1,36 @@
-﻿// Pi.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
-//
+﻿#include <iostream>
+#include <chrono>
+#include "Integration.h"
 
-#include <iostream>
+int main() {
+    int num_intervals, num_threads;
 
-int main()
-{
-    std::cout << "Hello World!\n";
+    // Pobranie danych od użytkownika
+    std::cout << "Podaj liczbe przedzialow: ";
+    std::cin >> num_intervals;
+    std::cout << "Podaj liczbe watkow: ";
+    std::cin >> num_threads;
+
+    if (num_intervals <= 0 || num_threads <= 0) {
+        std::cerr << "Liczba przedzialow i watkow musi byc dodatnia!" << std::endl;
+        return 1;
+    }
+
+    // Utworzenie obiektu klasy Integration
+    Integration integration(num_intervals, num_threads);
+
+    // Pomiar czasu
+    auto start_time = std::chrono::high_resolution_clock::now();
+    double pi = integration.calculatePi();
+    auto end_time = std::chrono::high_resolution_clock::now();
+
+    // Obliczenie czasu wykonania
+    std::chrono::duration<double> elapsed = end_time - start_time;
+
+    // Wyświetlenie wyników
+    std::cout << "Przyblizona wartosc PI: " << pi << std::endl;
+    std::cout << "Czas obliczen: " << elapsed.count() << " sekund" << std::endl;
+
+    return 0;
 }
 
-// Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
-// Debugowanie programu: F5 lub menu Debugowanie > Rozpocznij debugowanie
-
-// Porady dotyczące rozpoczynania pracy:
-//   1. Użyj okna Eksploratora rozwiązań, aby dodać pliki i zarządzać nimi
-//   2. Użyj okna programu Team Explorer, aby nawiązać połączenie z kontrolą źródła
-//   3. Użyj okna Dane wyjściowe, aby sprawdzić dane wyjściowe kompilacji i inne komunikaty
-//   4. Użyj okna Lista błędów, aby zobaczyć błędy
-//   5. Wybierz pozycję Projekt > Dodaj nowy element, aby utworzyć nowe pliki kodu, lub wybierz pozycję Projekt > Dodaj istniejący element, aby dodać istniejące pliku kodu do projektu
-//   6. Aby w przyszłości ponownie otworzyć ten projekt, przejdź do pozycji Plik > Otwórz > Projekt i wybierz plik sln
